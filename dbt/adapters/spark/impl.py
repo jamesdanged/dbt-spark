@@ -215,8 +215,8 @@ class SparkAdapter(SQLAdapter):
                 row_list=show_table_extended_rows,
                 relation_info_func=self._get_relation_information,
             )
-        except dbt.exceptions.DbtRuntimeError as e:
-            errmsg = getattr(e, "msg", "")
+        except Exception as e:
+            errmsg = str(e)
             if f"Database '{schema_relation}' not found" in errmsg:
                 return []
             # Iceberg compute engine behavior: show table
